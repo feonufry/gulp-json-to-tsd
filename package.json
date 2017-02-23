@@ -1,0 +1,25 @@
+{
+  "name": "gulp-json-to-tsd",
+  "version": "1.0.0",
+  "description": "A gulp plugin to generate typescript defenition file that represents json structure",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/feonufry/gulp-json-to-tsd.git"
+  },
+  "keywords": [
+    "gulp",
+    "tsd",
+    "typescript",
+    "json"
+  ],
+  "author": "Roman Liberov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/feonufry/gulp-json-to-tsd/issues"
+  },
+  "homepage": "https://github.com/feonufry/gulp-json-to-tsd#readme"
+}
