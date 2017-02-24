@@ -23,12 +23,52 @@ const gulp = require('gulp');
 const jsonToTsd = require('gulp-json-to-tsd');
 
 gulp.task("default", () => {
-	gulp.src("src/file.json")
+	gulp.src("src/foo.json")
 		.pipe(jsonToTsd())
 		.pipe(gulp.dest("dist"))
 );
 ```
 
+Let's assume that `src/foo.json` has the following contents:
+```
+{
+	"foo": "Lorem ipsum sid amet",
+	"bar": 7009,
+	"baz": {
+		"fizz": null,
+		"buzz": false
+	}
+}
+```
+
+Then by default plugin will generate the following definition:
+
+```
+declare interface Foo {
+	"foo": string;
+	"bar": number;
+	"baz": {
+		"fizz": null|undefined;
+		"buzz": boolean;
+	};
+}
+```
+
+If we switch on namespaces and variable declarations (see options below), we will get:
+
+```
+declare namespace example {
+	interface Foo {
+		"foo": string;
+		"bar": number;
+		"baz": {
+			"fizz": null|undefined;
+			"buzz": boolean;
+		};
+	}
+}
+declare const foo: example.Foo;
+```
 
 ## API
 

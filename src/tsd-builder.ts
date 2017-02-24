@@ -2,7 +2,7 @@
 function ident(style: string, size: number, level: number) {
     return level <= 0
         ? ""
-        : Array(level * (size + 1)).join(style === "tab" ? "\t" : " ");
+        : Array(level*size + 1).join(style === "tab" ? "\t" : " ");
 }
 
 export class TsdBuilder {
