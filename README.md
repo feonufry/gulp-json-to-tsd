@@ -47,10 +47,10 @@ And if `useInterfacePrefix = false`, an interface will be `UserGroup`.
 
 ##### namespace
 
-Type: `string|undefined`<br>
+Type: `string | undefined`<br>
 Default: `undefined`
 
-If specified, all interface declarations will be put into namespace with a given name.
+All interface declarations will be put into namespace with a given name.
 
 ##### identStyle
 

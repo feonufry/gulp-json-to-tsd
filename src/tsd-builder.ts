@@ -15,15 +15,15 @@ export class TsdBuilder {
         private readonly identSize: number) {
     }
 
-    public beginNamespace(name: string): TsdBuilder {
-        const statement = `namespace ${name} {`;
+    public beginNamespace(name: string, declared: boolean = true): TsdBuilder {
+        const statement = `${declared ? "declare " : ""}namespace ${name} {`;
         this.putStatement(statement);
         this.beginIdentation();
         return this;
     }
 
-    public beginInterface(name: string, exported: boolean = true): TsdBuilder {
-        const statement = `${exported ? "export " : ""}interface ${name} {`;
+    public beginInterface(name: string, declared: boolean = true): TsdBuilder {
+        const statement = `${declared ? "declare " : ""}interface ${name} {`;
         this.putStatement(statement);
         this.beginIdentation();
         return this;

@@ -13,15 +13,16 @@ var TsdBuilder = (function () {
         this.chunks = [];
         this.currentIdentation = 0;
     }
-    TsdBuilder.prototype.beginNamespace = function (name) {
-        var statement = "namespace " + name + " {";
+    TsdBuilder.prototype.beginNamespace = function (name, declared) {
+        if (declared === void 0) { declared = true; }
+        var statement = (declared ? "declare " : "") + "namespace " + name + " {";
         this.putStatement(statement);
         this.beginIdentation();
         return this;
     };
-    TsdBuilder.prototype.beginInterface = function (name, exported) {
-        if (exported === void 0) { exported = true; }
-        var statement = (exported ? "export " : "") + "interface " + name + " {";
+    TsdBuilder.prototype.beginInterface = function (name, declared) {
+        if (declared === void 0) { declared = true; }
+        var statement = (declared ? "declare " : "") + "interface " + name + " {";
         this.putStatement(statement);
         this.beginIdentation();
         return this;

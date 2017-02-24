@@ -65,9 +65,9 @@ function transform(file, json, encoding, options) {
     var fullFileName = path.parse(file.path);
     var interfaceName = getInterfaceName(fullFileName.name, options);
     if (options.namespace) {
-        builder.beginNamespace(options.namespace);
+        builder.beginNamespace(options.namespace, true);
     }
-    builder.beginInterface(interfaceName, true);
+    builder.beginInterface(interfaceName, !options.namespace);
     transformObject(json, builder);
     builder.end();
     if (options.namespace) {

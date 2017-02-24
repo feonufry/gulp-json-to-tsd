@@ -64,9 +64,9 @@ export function transform(file: any, json: any, encoding: string, options: Optio
     const interfaceName = getInterfaceName(fullFileName.name, options);
 
     if (options.namespace) {
-        builder.beginNamespace(options.namespace);
+        builder.beginNamespace(options.namespace, true /*declared*/);
     }
-    builder.beginInterface(interfaceName, true /*exported*/);
+    builder.beginInterface(interfaceName, !options.namespace /*declared*/);
     transformObject(json, builder);
     builder.end();
     if (options.namespace) {
