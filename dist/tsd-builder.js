@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 function ident(style, size, level) {
     return level <= 0
         ? ""
-        : Array(level * (size + 1)).join(style === "tab" ? "\t" : " ");
+        : Array(level * size + 1).join(style === "tab" ? "\t" : " ");
 }
 var TsdBuilder = (function () {
     function TsdBuilder(encoding, identStyle, identSize) {
