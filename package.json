@@ -1,9 +1,10 @@
 {
   "name": "gulp-json-to-tsd",
-  "version": "1.0.0",
-  "description": "A gulp plugin to generate typescript defenition file that represents json structure",
-  "main": "index.js",
+  "version": "0.9.1",
+  "description": "A gulp plugin to generate typescript definition file that represents a shape of JSON",
+  "main": "dist/index.js",
   "scripts": {
+    "build": "tsc --project tsconfig.src.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -12,7 +13,9 @@
   },
   "keywords": [
     "gulp",
+    "d.ts",
     "tsd",
+    "typings",
     "typescript",
     "json"
   ],
@@ -21,5 +24,14 @@
   "bugs": {
     "url": "https://github.com/feonufry/gulp-json-to-tsd/issues"
   },
-  "homepage": "https://github.com/feonufry/gulp-json-to-tsd#readme"
+  "homepage": "https://github.com/feonufry/gulp-json-to-tsd#readme",
+  "devDependencies": {
+    "@types/gulp-util": "^3.0.30",
+    "typescript": "^2.2.1"
+  },
+  "dependencies": {
+    "gulp-util": "^3.0.8",
+    "path": "^0.12.7",
+    "through2": "^2.0.3"
+  }
 }
