@@ -24,6 +24,7 @@ module.exports = function (options) {
     }
     options = options || {};
     options.useInterfacePrefix = options.useInterfacePrefix || false;
+    options.declareVariable = options.declareVariable || false;
     options.identStyle = options.identStyle || "tab";
     options.identSize = options.identSize || 1;
     return through2.obj(generate);

@@ -12,12 +12,12 @@ function isDigit(char: string) {
     return char >= "0" && char <= "9";
 }
 
-function getInterfaceName(fileName: string, options: Options): string {
-    let result = options.useInterfacePrefix ? "I" : "";
-    let upperCase = true;
-    for (const char of fileName) {
+function getCamelCase(originalName: string, startFromUpperCase: boolean, allowFirstDigit: boolean): string {
+    let result = "";
+    let upperCase = startFromUpperCase;
+    for (const char of originalName) {
         if (isDigit(char)) {
-            if (result.length === 0) {
+            if (result.length === 0 && !allowFirstDigit) {
                 result = "_";
             }
             result = result + char;
@@ -35,6 +35,17 @@ function getInterfaceName(fileName: string, options: Options): string {
         }
         upperCase = true;
     }
+    return result;
+}
+
+function getInterfaceName(fileName: string, options: Options): string {
+    const useInterfacePrefix = options.useInterfacePrefix || false;
+    const result = (useInterfacePrefix ? "I" : "") + getCamelCase(fileName, true, useInterfacePrefix);
+    return result;
+}
+
+function getVariableName(fileName: string): string {
+    const result = getCamelCase(fileName, false /*startFromUpperCase*/, false /*allowFirstDigit*/);
     return result;
 }
 
@@ -71,6 +82,12 @@ export function transform(file: any, json: any, encoding: string, options: Optio
     builder.end();
     if (options.namespace) {
         builder.end();
+    }
+    if (options.declareVariable) {
+        const variableName = getVariableName(fullFileName.name);
+        builder.declareConstant(
+            variableName, 
+            options.namespace ? `${options.namespace}.${interfaceName}` : interfaceName);
     }
     file.path = path.join(fullFileName.dir, `${fullFileName.name}.d.ts`);
     file.contents = builder.toBuffer();

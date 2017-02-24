@@ -9,13 +9,13 @@ function isLatinLetter(char) {
 function isDigit(char) {
     return char >= "0" && char <= "9";
 }
-function getInterfaceName(fileName, options) {
-    var result = options.useInterfacePrefix ? "I" : "";
-    var upperCase = true;
-    for (var _i = 0, fileName_1 = fileName; _i < fileName_1.length; _i++) {
-        var char = fileName_1[_i];
+function getCamelCase(originalName, startFromUpperCase, allowFirstDigit) {
+    var result = "";
+    var upperCase = startFromUpperCase;
+    for (var _i = 0, originalName_1 = originalName; _i < originalName_1.length; _i++) {
+        var char = originalName_1[_i];
         if (isDigit(char)) {
-            if (result.length === 0) {
+            if (result.length === 0 && !allowFirstDigit) {
                 result = "_";
             }
             result = result + char;
@@ -34,6 +34,15 @@ function getInterfaceName(fileName, options) {
         }
         upperCase = true;
     }
+    return result;
+}
+function getInterfaceName(fileName, options) {
+    var useInterfacePrefix = options.useInterfacePrefix || false;
+    var result = (useInterfacePrefix ? "I" : "") + getCamelCase(fileName, true, useInterfacePrefix);
+    return result;
+}
+function getVariableName(fileName) {
+    var result = getCamelCase(fileName, false, false);
     return result;
 }
 function transformObject(json, builder) {
@@ -72,6 +81,10 @@ function transform(file, json, encoding, options) {
     builder.end();
     if (options.namespace) {
         builder.end();
+    }
+    if (options.declareVariable) {
+        var variableName = getVariableName(fullFileName.name);
+        builder.declareConstant(variableName, options.namespace ? options.namespace + "." + interfaceName : interfaceName);
     }
     file.path = path.join(fullFileName.dir, fullFileName.name + ".d.ts");
     file.contents = builder.toBuffer();

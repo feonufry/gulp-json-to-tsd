@@ -50,7 +50,15 @@ And if `useInterfacePrefix = false`, an interface will be `UserGroup`.
 Type: `string | undefined`<br>
 Default: `undefined`
 
-All interface declarations will be put into namespace with a given name.
+If specified, all interface declarations will be put into namespace with a given name.
+
+##### declareVariable
+
+Type: `boolean`<br>
+Default: `false`
+
+Specifies if a variable of a generated interface must be declared. A declaration is put after an interface 
+out of a namespace block (if any).
 
 ##### identStyle
 
