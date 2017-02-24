@@ -1,6 +1,6 @@
 {
   "name": "gulp-json-to-tsd",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "description": "A gulp plugin to generate typescript definition file that represents a shape of JSON",
   "main": "dist/index.js",
   "scripts": {
