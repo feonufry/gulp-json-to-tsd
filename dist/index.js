@@ -14,7 +14,7 @@ module.exports = function (options) {
             return;
         }
         try {
-            var json = require(file.path);
+            var json = JSON.parse(file.contents);
             this.push(transform_1.transform(file, json, encoding, options));
         }
         catch (ex) {

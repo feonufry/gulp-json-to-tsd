@@ -22,7 +22,7 @@ export = function (options: Options) {
         }
 
         try {
-            const json = require(file.path);
+            const json = JSON.parse(file.contents);
             this.push(transform(file, json, encoding, options));
         } catch (ex) {
             this.emit("error", new gutil.PluginError(PLUGIN_NAME, ex));
